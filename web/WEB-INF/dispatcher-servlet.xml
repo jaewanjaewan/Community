@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--자바 파일에 있는 빈등록 애노테이션을 검색을 하고 찾은다음에 빈등록을 해준다. 기준이되는 기본 패키지명을 설정-->
+    <context:component-scan base-package="com.koreait.commuity"/>
+
+    <!--@Controller 활성화 -> 주소값 맵핑할수있다-->
+    <mvc:annotation-driven/>
+
+    <!--/res로 요청하는것들은 res로 접근하자라는뜻-->
+    <mvc:resources mapping="/res/**" location="/res/"/>
+
+    <!--js, css이용할려면 필수--> <!--property : setter를 호출-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/> <!--앞쪽에 value값이 붙여짐-->
+        <property name="suffix" value=".jsp"/> <!--뒤쪽에 value같 붙여짐-->
+        <property name="order" value="2"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions"> <!--List<String> 타입-->
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+        <!--preparerFactoryClass :: tiles에 추가적인 기능을 더해주기 위해 선언한 부분이다.-->
+        <!--preparer는 렌더링 하기 전 거쳐가는 것?? 이라고 한다 쉽게말하면 화면띄우기전 한번 거쳐간다고 생각하시면 될 것 같아요.-->
+        <property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"/>
+    </bean>
+</beans>
