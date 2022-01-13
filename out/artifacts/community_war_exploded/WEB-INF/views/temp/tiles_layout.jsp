@@ -15,7 +15,7 @@
     <div id="container">
         <tiles:insertAttribute name="header"/> <!--header.jsp가 들어옴-->
         <section>
-            <tiles:insertAttribute name="content"/>
+            <tiles:insertAttribute name="body"/>
         </section>
         <tiles:insertAttribute name="footer"/> <!--name : tiles.xml에 있는 이름을 적은것-->
     </div>

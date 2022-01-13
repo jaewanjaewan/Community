@@ -33,6 +33,7 @@
     <update id="addHits">
         update t_board
         set hits = hits + 1
+        , lastip = #{lastip}
         where iboard = ${iboard}
     </update>
 
@@ -45,16 +46,11 @@
             <if test="ctnt != null and ctnt != ''">
                 ctnt = #{ctnt},
             </if>
-            <if test="lastip != null and lastip != ''">
-                lastip = #{lastip},
-            </if>
             <if test="isdel == 1">
                 isdel = 1
             </if>
         </set>
         where iboard = ${iboard}
-        <if test="lastip == null"> <!--분기이유: 글을 수정했거나 삭제했을땐 service에서 lastip범위를 만나지 않았기때문에 null이다.-->
-            AND iuser = ${iuser}  <!--조회수만 올릴땐 굳이 iuser값을 조건(where)으로 안줘도됨-->
-        </if>
+         AND iuser = ${iuser}
     </update>
 </mapper>

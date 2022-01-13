@@ -5,6 +5,7 @@ import com.koreait.commuity.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -67,5 +68,21 @@ public class UserController {
     public String logout(){
         hs.invalidate();
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/mypage/profile")
+    public void mypageProfile(){}
+
+    @ResponseBody//return이 json이됨
+    @PostMapping("/mypage/profile")
+    public Map<String, String> mypageProfileProc(MultipartFile profileimg){
+        String fileNm = service.uploadProfileImg(profileimg);
+        System.out.println("fileName : " + profileimg.getOriginalFilename());
+        Map<String, String> result = new HashMap<>();
+        /*UserEntity entity = (UserEntity) hs.getAttribute(Const.LOGIN_USER);
+        entity.setProfileimg(fileNm);
+        hs.setAttribute(Const.LOGIN_USER, entity);*/
+        result.put("result", fileNm);
+        return result;
     }
 }

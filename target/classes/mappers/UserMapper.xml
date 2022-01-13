@@ -14,4 +14,16 @@
         VALUES
         (#{uid}, #{upw}, #{nm}, ${gender})
     </insert>
+
+    <update id="updUser">
+        update t_user
+        set
+        <if test=" upw != null and upw != '' ">
+            upw = #{upw}
+        </if>
+        <if test=" profileimg != null and profileimg != '' ">
+            profileimg = #{profileimg}
+        </if>
+        where iuser = ${iuser}
+    </update>
 </mapper>

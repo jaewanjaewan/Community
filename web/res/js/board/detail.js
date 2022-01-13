@@ -2,7 +2,7 @@
     const btnDel = document.querySelector('#btnDel');
     const data = document.querySelector('#data');
 
-    if(btnDel) {
+    if (btnDel) {
         btnDel.addEventListener('click', function () {
             let iboard = data.dataset.iboard;
             let icategory = data.dataset.icategory;
@@ -11,4 +11,14 @@
             }
         })
     }
+
+    const btnMod = document.querySelector('#btnMod');
+    if (btnMod) {
+        btnMod.addEventListener('click', function () {
+            let iboard = data.dataset.iboard;
+            location.href = `/board/mod?iboard=${iboard}`;
+        });
+    }
 }
+
+

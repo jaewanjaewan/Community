@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,5 +54,17 @@ public class BoardController {
     public String delProc(BoardEntity entity){
          int rs = service.delBoard(entity);
          return "redirect:/board/list/"+entity.getIcategory();
+    }
+
+    @GetMapping("/mod")
+    public String mod(BoardDto dto, Model model){
+        model.addAttribute(Const.DATA, service.selBoard(dto));
+        return "board/write"; //jsp파일로 간다
+    }
+
+    @PostMapping("/mod")
+    public String modProc(BoardEntity entity){
+        int rs = service.updBoard(entity);
+        return "redirect:/board/detail?iboard="+entity.getIboard();
     }
 }

@@ -19,6 +19,9 @@
     <!--/res로 요청하는것들은 res로 접근하자라는뜻-->
     <mvc:resources mapping="/res/**" location="/res/"/>
 
+    <!--외부에있는 이미지파일을 가져와서 서버에 내장-->
+    <mvc:resources mapping="/images/**" location="file:///C:/upload/images/"/>
+
     <!--js, css이용할려면 필수--> <!--property : setter를 호출-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/> <!--앞쪽에 value값이 붙여짐-->
