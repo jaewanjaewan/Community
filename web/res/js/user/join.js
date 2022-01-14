@@ -45,13 +45,13 @@
             if(!idRegex.test(uid)){
                 alert('아이디는 대소문자, 숫자조합으로 4~15글자가 되어야 합니다.');
                 e.preventDefault();
-            } else if (!pwRegex.test(upw)){
+            } else if (!pwRegex.test(upw)){  //test값이 범위에 속하면 true, 속하지않으면 false리턴
                 alert('비밀번호는 대소문자, 숫자, !@_ 조합으로 4~20글자가 되어야 합니다.');
                 e.preventDefault();
             } else if(upw !== upwChk){
                 alert('비밀번호를 확인해주세요')
                 e.preventDefault();
-            } else if (!nmRegex.test(nm)){
+            } else if (!nmRegex.test(nm)){  //test값이 범위에 속하면 true, 속하지않으면 false리턴
                 alert('이름은 한글로 2~5글자가 되어야 합니다.');
                 e.preventDefault();
             }

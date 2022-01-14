@@ -8,4 +8,5 @@ public class Const {
     public static final String LIST = "list";
     public static final String I_CATEGORY = "icategory";
     public static final String DATA = "data";
+    public static final String SUB_MENU_LIST = "subMenuList";
 }

@@ -3,6 +3,7 @@ package com.koreait.commuity.board;
 import com.koreait.commuity.UserUtils;
 import com.koreait.commuity.model.BoardDto;
 import com.koreait.commuity.model.BoardEntity;
+import com.koreait.commuity.model.BoardPrevNextVo;
 import com.koreait.commuity.model.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,10 @@ public class BoardService {
             }
         }
         return detail;
+    }
+
+    public BoardPrevNextVo selPrevNext(BoardVo vo){
+        return mapper.selPrevNext(vo);
     }
 
     public int delBoard(BoardEntity entity){ //entity에 icategory, iboard담겨있음

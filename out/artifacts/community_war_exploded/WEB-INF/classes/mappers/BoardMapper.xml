@@ -30,6 +30,27 @@
           AND A.iboard = ${iboard}
     </select>
 
+    <select id="selPrevNext" resultType="BoardPrevNextVo">
+        <![CDATA[
+            SELECT (
+                SELECT iboard FROM t_board
+                WHERE isdel = 0
+                AND icategory = ${icategory}
+                AND iboard > ${iboard}
+                ORDER BY iboard
+                LIMIT 1
+            ) AS previboard,
+            (
+                SELECT iboard FROM t_board
+                WHERE isdel = 0
+                AND icategory = ${icategory}
+                AND iboard < ${iboard}
+                ORDER BY iboard DESC
+                LIMIT 1
+            ) AS nextiboard
+        ]]> <!--꺽새 오류 해결하기위해 cdata로 감싼다-->
+    </select>
+
     <update id="addHits">
         update t_board
         set hits = hits + 1
