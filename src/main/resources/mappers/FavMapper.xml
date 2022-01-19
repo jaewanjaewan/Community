@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.commuity.board.fav.FavMapper"> <!--namespace항상 체크-->
+    <insert id="insBoardFav">
+        insert into t_board_fav
+        (iboard, iuser)
+        values
+        (${iboard}, ${iuser})
+    </insert>
+
+    <select id="selBoardFav" resultType="BoardFavEntity">
+        select iboard, iuser, rdt
+        from t_board_fav
+        where iboard = ${iboard}
+        and iuser = ${iuser}
+    </select>
+
+    <delete id="delBoardFav">
+        delete from t_board_fav
+        where iboard = ${iboard}
+          and iuser = ${iuser}
+    </delete>
+</mapper>

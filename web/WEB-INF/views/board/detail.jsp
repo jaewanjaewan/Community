@@ -7,7 +7,13 @@
             <button id="btnDel">삭제</button>
         </div>
     </c:if>
-    <div id="data" data-iboard="${data.iboard}" data-icategory="${data.icategory}"></div>
+    <div id="data"
+         data-iboard="${data.iboard}"
+         data-icategory="${data.icategory}"
+         data-nm="${sessionScope.loginUser.nm}"
+         data-iuser="${sessionScope.loginUser.iuser}"
+         data-profileimg="${sessionScope.loginUser.profileimg}">
+    </div>
     <div>
         <c:if test="${requestScope.prevnext.previboard > 0}">
             <a href="/board/detail?iboard=${requestScope.prevnext.previboard}"><button>이전글</button></a>
@@ -16,6 +22,12 @@
             <a href="/board/detail?iboard=${requestScope.prevnext.nextiboard}"><button>다음글</button></a>
         </c:if>
     </div>
+    <c:if test="${sessionScope.loginUser != null}">
+        <!--좋아요-->
+        <div>
+            <i id="fav_icon" class="fs-30 pointer far fa-thumbs-up"></i> <!--font쓸려면 cdn코드 추가해야함 tileslayout.jsp에추가했음-->
+        </div>
+    </c:if>
     <div>
         <div>${data.categorynm}</div>
         <div>조회수 : ${data.hits} | 등록일시 : ${data.rdt}</div>
@@ -31,5 +43,5 @@
             </form>
         </div>
     </c:if>
-    <div class="m-t-20">댓글 리스트</div>
+    <div class="m-t-20" id="cmt_list"></div>
 </div>

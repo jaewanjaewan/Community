@@ -3,10 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.commuity.board.cmt.BoardCmtMapper">
-    <insert id="insBoardCmt">
+    <insert id="insBoardCmt" useGeneratedKeys="true" keyProperty="icmt"> <!--리턴값이 icmt가됨-->
         insert into t_board_cmt
         (iboard, iuser, ctnt)
         values
         (${iboard}, ${iuser}, #{ctnt})
     </insert>
+    
+    <select id="selBoardCmtList" resultType="BoardCmtVo">
+        select A.*, B.nm as writernm, B.profileimg
+        from t_board_cmt A left join t_user B on A.iuser = B.iuser
+        where A.iboard = ${iboard}
+        order by A.icmt;
+    </select>
+
+    <update id="updBoardCmt">
+        update t_board_cmt
+        set ctnt = #{ctnt}
+        where icmt = ${icmt} and iuser = ${iuser}
+    </update>
+    
+    <delete id="delBoardCmt">
+        delete from t_board_cmt
+        where icmt = ${icmt} and iuser = ${iuser}
+    </delete>
 </mapper>

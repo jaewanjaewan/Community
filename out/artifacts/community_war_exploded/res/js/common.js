@@ -21,9 +21,8 @@ const myFetch = {
     },
     get: function(url, cb, param){
         if(param){
-            const queryString = Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
-            //object.keys()는 key만으로 구성된 배열을 만들어준다.
-            url = `${url}?${queryString}`;
+            const queryString = '?' + Object.keys(param).map(key => `${key}=${param[key]}`).join('&');
+            url += queryString;
         }
         return this.send(fetch(url), cb);
     },
@@ -32,6 +31,19 @@ const myFetch = {
             'method': 'post',
             'headers': { 'Content-Type': 'application/json' },
             'body': JSON.stringify(param)
+        }), cb);
+    },
+    put : function (url, cb, param) {
+        return this.send(fetch(url, {
+            'method': 'put',
+            'headers': { 'Content-Type': 'application/json' },
+            'body': JSON.stringify(param)
+        }), cb)
+    },
+    delete: function (url, cb) {
+        return this.send(fetch(url, {
+            'method': 'delete',
+            'headers': { 'Content-Type': 'application/json' },
         }), cb);
     }
 }
